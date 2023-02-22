@@ -11,8 +11,8 @@ class OrderDelivery
     private object $receiver;
 
     private static array $partners = [
-        1 => Partners\Api::class,
-        2 => Partners\CSV::class
+        1 => Requests\Api::class,
+        2 => Requests\CSV::class
     ];
 
     private function __construct(PartnerInterface $partner )

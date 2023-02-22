@@ -59,15 +59,4 @@ class OrderDeliveryTest extends TestCase
         $this->expectException(\Exception::class);
         OrderDelivery::from($order);
     }
-    /*
-    public function testCanRunOrderDeliveryAndReceiveOrderStatus()
-    {
-        $partnerMock = $this->createMock(PartnerInterface::class);
-        $partnerMock->method('run')->willReturn(OrderStatus::SHIPPED);
-
-        $delivery = new OrderDelivery($partnerMock);
-        $orderStatus = $delivery->run();
-
-        $this->assertEquals(OrderStatus::SHIPPED, $orderStatus);
-    } */
 }
