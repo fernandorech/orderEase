@@ -32,7 +32,7 @@ class Api implements PartnerInterface
         return OrderStatus::Delivered;
     }
 
-    private  function prepareData() : \JsonSerializable
+    public  function prepareData()
     {
 
         $order = [
