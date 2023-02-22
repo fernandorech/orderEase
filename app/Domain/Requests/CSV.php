@@ -24,7 +24,8 @@ class CSV implements PartnerInterface
 
     public function __construct(
         public Order $order,
-    ) {}
+    ) {
+    }
 
     public function run() : OrderStatus
     {
@@ -34,17 +35,20 @@ class CSV implements PartnerInterface
 
         Storage::disk('local')->put("Orders/" . $fileName, $csv);
 
-        $request = Storage::createSftpDriver([
+        $request = Storage::createSftpDriver(
+            [
             'host' => $this->order->partner->endpoint,
             'username' => $this->order->partner->username,
             'password' => $this->order->partner->password,
-        ]);
+            ]
+        );
         $request->put()->put("Orders/" . $fileName, $csv);
 
         return OrderStatus::Delivered;
     }
 
-    private function prepareData() {
+    private function prepareData()
+    {
         $handle = fopen('php://temp', 'w+');
         fputcsv($handle, self::$HEADERS);
 

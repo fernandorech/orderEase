@@ -8,41 +8,39 @@ use Exception;
 
 class OrderDelivery
 {
-    private object $receiver;
-
-    private static array $partners = [
+    private static array $requests = [
         1 => Requests\Api::class,
         2 => Requests\CSV::class
     ];
 
-    private function __construct(PartnerInterface $partner )
-    {
-        $this->receiver = $partner;
+    public function __construct(
+        public PartnerInterface $order,
+    ) {
     }
+
 
     public static function from($order) : self
     {
-        if(!array_key_exists($order->partner_id, self::$partners)) {
+        if(!array_key_exists($order->partner_id, self::$requests)) {
             throw new Exception('Partner Id is not avaliable');
         }
 
-        $partner =  new self::$partners[$order->partner_id]($order);
+        $partner =  new self::$requests[$order->partner_id]($order);
         return new OrderDelivery($partner);
     }
 
     public function run() : OrderStatus
     {
-        return $this->receiver->run();
+        return $this->order->run();
     }
 
     public function returnInstance() : object
     {
-        return $this->receiver;
+        return $this->order;
     }
 
     public function isInstanceOf($class) : bool
     {
-        return ((new \ReflectionClass($this->receiver))->getShortName() == $class) ? true : false ;
+        return ((new \ReflectionClass($this->order))->getShortName() == $class) ? true : false ;
     }
-
 }

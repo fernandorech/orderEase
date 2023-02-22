@@ -13,7 +13,8 @@ class OrderController extends Controller
 {
     public function __construct(
         public OrderRepositoryInterface $orderRepository,
-    ) {}
+    ) {
+    }
 
     public function insert(storeOrderRequest $request)
     {
@@ -24,12 +25,14 @@ class OrderController extends Controller
 
         ProcessOrder::dispatch($order);
 
-        return response()->json([
+        return response()->json(
+            [
             'success' => true,
             'data' => [
                 'order' => $order->id,
                 'status' => $order->status
             ]
-        ]);
+            ]
+        );
     }
 }

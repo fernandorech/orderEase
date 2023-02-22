@@ -11,16 +11,19 @@ class Api implements PartnerInterface
 {
     public function __construct(
         public Order $order,
-    ) {}
+    ) {
+    }
 
     public function run() : OrderStatus
     {
 
         $request = $this->prepareData();
 
-        $response = Http::withHeaders([
+        $response = Http::withHeaders(
+            [
             'Content-Type' => 'application/json',
-        ])->post($this->order->partner->endpoint, $request);
+            ]
+        )->post($this->order->partner->endpoint, $request);
 
         if(! $response->ok()) {
             OrderStatus::Error;
@@ -29,7 +32,8 @@ class Api implements PartnerInterface
         return OrderStatus::Delivered;
     }
 
-    private  function prepareData() : \JsonSerializable {
+    private  function prepareData() : \JsonSerializable
+    {
 
         $order = [
             "Orders" => [

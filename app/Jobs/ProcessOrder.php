@@ -18,7 +18,8 @@ class ProcessOrder implements ShouldQueue
 
     public function __construct(
         public Order $order,
-    ) {}
+    ) {
+    }
 
     public function handle(): void
     {

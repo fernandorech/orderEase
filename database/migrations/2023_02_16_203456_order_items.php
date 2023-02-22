@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_items', static function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('order_id');
-            $table->integer('ecommerce_item_id');
-            $table->integer('partner_item_id');
-            $table->integer('item_quantity');
-        });
+        Schema::create(
+            'order_items', static function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->integer('order_id');
+                $table->integer('ecommerce_item_id');
+                $table->integer('partner_item_id');
+                $table->integer('item_quantity');
+            }
+        );
     }
 
     /**

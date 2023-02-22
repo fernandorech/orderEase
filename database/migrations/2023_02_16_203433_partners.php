@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('partners', static function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->integer('type');
-            $table->string('endpoint')->nullable();
-            $table->string('username')->nullable();
-            $table->string('password')->nullable();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
-        });
+        Schema::create(
+            'partners', static function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('name');
+                $table->integer('type');
+                $table->string('endpoint')->nullable();
+                $table->string('username')->nullable();
+                $table->string('password')->nullable();
+                $table->timestamp('created_at')->useCurrent();
+                $table->timestamp('updated_at')->useCurrent();
+            }
+        );
     }
 
     /**

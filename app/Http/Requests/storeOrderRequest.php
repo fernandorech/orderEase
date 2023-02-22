@@ -34,9 +34,11 @@ class storeOrderRequest extends FormRequest
             'delivery_date'     => 'required|date',
             'partner_id' => [
                 'required',
-                Rule::unique('orders')->where(function ($query) use($ecommerce_id) {
-                    return $query->where('ecommerce_id', $ecommerce_id);
-                })
+                Rule::unique('orders')->where(
+                    function ($query) use ($ecommerce_id) {
+                        return $query->where('ecommerce_id', $ecommerce_id);
+                    }
+                )
             ],
             'items.*.ecommerce_item_id' => 'required|numeric',
             'items.*.partner_item_id'   => 'required|numeric',
@@ -47,10 +49,14 @@ class storeOrderRequest extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'Validation errors',
-            'data'      => $validator->errors()
-        ]));
+        throw new HttpResponseException(
+            response()->json(
+                [
+                'success'   => false,
+                'message'   => 'Validation errors',
+                'data'      => $validator->errors()
+                ]
+            )
+        );
     }
 }
