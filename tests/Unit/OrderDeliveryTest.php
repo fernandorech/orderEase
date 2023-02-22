@@ -7,8 +7,8 @@ use PHPUnit\Framework\TestCase;
 use App\Domain\OrderDelivery;
 use App\Domain\Types\OrderStatus;
 use App\Domain\Contracts\PartnerInterface;
-use App\Domain\Partners\Api;
-use App\Domain\Partners\CSV;
+use App\Domain\Requests\Api;
+use App\Domain\Requests\CSV;
 
 class OrderDeliveryTest extends TestCase
 {
