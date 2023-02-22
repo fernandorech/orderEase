@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Partners;
+namespace App\Domain\Requests;
 
 use App\Domain\Contracts\PartnerInterface;
 use App\Domain\Types\OrderStatus;
